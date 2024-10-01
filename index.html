@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Spese</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase App (sempre necessario) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <!-- Configurazione Firebase -->
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyCKxmmLDDORX11T19MiTeC0Pja_wMSzAY0",
+            authDomain: "gestione-spese-8c075.firebaseapp.com",
+            projectId: "gestione-spese-8c075",
+            storageBucket: "gestione-spese-8c075.appspot.com",
+            messagingSenderId: "269032762670",
+            appId: "1:269032762670:web:245a1697435eb457671ebf",
+            measurementId: "G-VMQKRMNEYS"
+        };
+        // Inizializza Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+</head>
+<body>
+    <h1>Gestione Spese</h1>
+
+    <div id="auth-container"></div>
+
+    <div id="content" style="display: none;">
+        <div id="expenseFormContainer">
+            <h2>Spesa</h2>
+            <form id="expenseForm">
+                <input type="text" id="description" placeholder="Descrizione spesa" required>
+                <input type="date" id="date" required>
+                <input type="number" id="totalAmount" placeholder="Importo totale" step="0.01" required>
+
+                <h3>Chi ha messo cosa:</h3>
+                <div id="payers">
+                    <div class="form-row">
+                        <label>Jack:</label>
+                        <input type="number" id="jackAmount" placeholder="Importo messo da Jack" step="0.01" required>
+                    </div>
+                    <div class="form-row">
+                        <label>Ste:</label>
+                        <input type="number" id="steAmount" placeholder="Importo messo da Ste" step="0.01" required>
+                    </div>
+                </div>
+
+                <h3>Divisione della spesa:</h3>
+                <div id="splitMethod">
+                    <label for="splitType">Tipo di divisione:</label>
+                    <select id="splitType">
+                        <option value="equally">Equamente</option>
+                        <option value="exact">Importo esatto</option>
+                    </select>
+                </div>
+
+                <div id="splitDetails" style="display:none;">
+                    <div class="form-row">
+                        <label>Importo per Jack:</label>
+                        <input type="number" id="jackSplit" placeholder="Importo per Jack" step="0.01">
+                    </div>
+                    <div class="form-row">
+                        <label>Importo per Ste:</label>
+                        <input type="number" id="steSplit" placeholder="Importo per Ste" step="0.01">
+                    </div>
+                </div>
+
+                <button type="submit">Aggiungi Spesa</button>
+            </form>
+        </div>
+
+        <h2>Elenco Spese</h2>
+        <div id="totalBalance"></div>
+
+        <table id="expenseTable">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Descrizione</th>
+                    <th>Totale</th>
+                    <th>Jack (messo)</th>
+                    <th>Ste (messo)</th>
+                    <th>Jack (dovuto)</th>
+                    <th>Ste (dovuto)</th>
+                    <th>Azione</th>
+                </tr>
+            </thead>
+            <tbody id="expenseList"></tbody>
+        </table>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
