@@ -1,106 +1,116 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestione Spese</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="icon.png">
-    <link rel="stylesheet" href="style.css">
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f2f2f7;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
 
-    <!-- Firebase App (sempre necessario) -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <!-- Firebase Firestore -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <!-- Firebase Authentication -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+h1 {
+    color: #1c1c1e;
+    font-weight: 600;
+}
 
-    <!-- Configurazione Firebase -->
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyCKxmmLDDORX11T19MiTeC0Pja_wMSzAY0",
-            authDomain: "gestione-spese-8c075.firebaseapp.com",
-            projectId: "gestione-spese-8c075",
-            storageBucket: "gestione-spese-8c075.appspot.com",
-            messagingSenderId: "269032762670",
-            appId: "1:269032762670:web:245a1697435eb457671ebf",
-            measurementId: "G-VMQKRMNEYS"
-        };
-        // Inizializza Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-    </script>
-</head>
-<body>
-    <h1>Gestione Spese</h1>
+#expenseFormContainer, #expenseTableContainer {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 20px;
+}
 
-    <div id="auth-container"></div>
+h2 {
+    color: #1c1c1e;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
 
-    <div id="content" style="display: none;">
-        <div id="expenseFormContainer">
-            <h2>Spesa</h2>
-            <form id="expenseForm">
-                <input type="text" id="description" placeholder="Descrizione spesa" required>
-                <input type="date" id="date" required>
-                <input type="number" id="totalAmount" placeholder="Importo totale" step="0.01" required>
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-                <h3>Chi ha messo cosa:</h3>
-                <div id="payers">
-                    <div class="form-row">
-                        <label>Jack:</label>
-                        <input type="number" id="jackAmount" placeholder="Importo messo da Jack" step="0.01" required>
-                    </div>
-                    <div class="form-row">
-                        <label>Ste:</label>
-                        <input type="number" id="steAmount" placeholder="Importo messo da Ste" step="0.01" required>
-                    </div>
-                </div>
+form input, form select, form button {
+    margin-bottom: 10px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #c7c7cc;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
 
-                <h3>Divisione della spesa:</h3>
-                <div id="splitMethod">
-                    <label for="splitType">Tipo di divisione:</label>
-                    <select id="splitType">
-                        <option value="equally">Equamente</option>
-                        <option value="exact">Importo esatto</option>
-                    </select>
-                </div>
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+}
 
-                <div id="splitDetails" style="display:none;">
-                    <div class="form-row">
-                        <label>Importo per Jack:</label>
-                        <input type="number" id="jackSplit" placeholder="Importo per Jack" step="0.01">
-                    </div>
-                    <div class="form-row">
-                        <label>Importo per Ste:</label>
-                        <input type="number" id="steSplit" placeholder="Importo per Ste" step="0.01">
-                    </div>
-                </div>
+.form-row label {
+    flex: 1;
+    text-align: right;
+    margin-right: 10px;
+}
 
-                <button type="submit">Aggiungi Spesa</button>
-            </form>
-        </div>
+table {
+    width: 100%;
+    max-width: 700px;
+    margin: 10px auto;
+    border-collapse: collapse;
+}
 
-        <h2>Elenco Spese</h2>
-        <div id="totalBalance"></div>
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    white-space: nowrap; /* Impedisce il ritorno a capo */
+}
 
-        <table id="expenseTable">
-            <thead>
-                <tr>
-                    <th>Data</th>
-                    <th>Descrizione</th>
-                    <th>Totale</th>
-                    <th>Jack (messo)</th>
-                    <th>Ste (messo)</th>
-                    <th>Jack (dovuto)</th>
-                    <th>Ste (dovuto)</th>
-                    <th>Azione</th>
-                </tr>
-            </thead>
-            <tbody id="expenseList"></tbody>
-        </table>
-    </div>
+th {
+    background-color: #007aff;
+    color: white;
+    font-weight: 500;
+    word-wrap: break-word;
+}
 
-    <script src="app.js"></script>
-</body>
-</html>
+td {
+    text-align: center;
+}
+
+.delete-btn {
+    background-color: #ff3b30;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.delete-btn:hover {
+    background-color: #ff453a;
+}
+
+#totalBalance {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+    #expenseFormContainer, #expenseTableContainer {
+        width: 90%;
+    }
+
+    table {
+        font-size: 12px;
+    }
+}
