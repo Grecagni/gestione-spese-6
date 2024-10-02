@@ -98,6 +98,19 @@ td {
     background-color: #ff453a;
 }
 
+.edit-btn {
+    background-color: #b8860b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.edit-btn:hover {
+    background-color: #d2691e;
+}
+
 #totalBalance {
     font-size: 18px;
     font-weight: 600;
