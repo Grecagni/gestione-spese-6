@@ -149,7 +149,7 @@ function displayExpenses() {
                 <td>€${parseFloat(expense.steShare).toFixed(2)}</td>
                 <td>
                     <button class="delete-btn" onclick="confirmDeleteExpense('${doc.id}')">Elimina</button>
-                    <button class="btn danger">modifica</button>
+                    <button class="edit-btn">modifica</button>
                 </td>
             `;
             expenseList.appendChild(row);
