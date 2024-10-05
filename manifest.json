@@ -1,18 +1,18 @@
 {
     "name": "Gestione Spese",
     "short_name": "Spese",
-    "start_url": "/gestione-spese-2-v2/index.html",
+    "start_url": "/gestione-spese-6/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#007aff",
     "icons": [
         {
-            "src": "/gestione-spese-2-v2/icon-192x192.png",
+            "src": "/gestione-spese-6/icon-192x192.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "/gestione-spese-2-v2/icon-512x512.png",
+            "src": "/gestione-spese-6/icon-512x512.png",
             "type": "image/png",
             "sizes": "512x512"
         }
