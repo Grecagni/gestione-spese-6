@@ -129,7 +129,7 @@ td {
 }
 
 .buttonT {
-    padding: 5px 10px;
+    width: 50%;
     text-align: center;
     cursor: pointer;
     outline: none;
