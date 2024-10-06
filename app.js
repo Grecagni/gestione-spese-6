@@ -206,21 +206,30 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Seleziona tutti i pulsanti con la classe buttonT
-    const buttonsTutto = document.querySelectorAll('.buttonT');
-    
-    // Aggiungi un event listener a ciascun pulsante
-    buttonsTutto.forEach(button => {
-        button.addEventListener('click', function() {
-            // Trova il campo di input associato al pulsante cliccato
-            const formRow = button.closest('.form-row'); // trova il div genitore
-            const amountInput = formRow.querySelector('input[type="number"]'); // trova l'input di tipo number
 
-            // Recupera l'importo totale
-            const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0;
+    const buttonJack = document.getElementById('buttonJack'); 
+    const buttonSte = document.getElementById('buttonSte');
 
-            // Imposta il valore dell'input sul totale
-            amountInput.value = totalAmount.toFixed(2); // formattiamo il numero a 2 decimali
-        });
+    function setAmount(isJack) {
+        const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0; // Recupera l'importo totale o mette a 0 se non c'è
+        const formRowJack = document.querySelector('jackAmount'); 
+        const formRowSte = document.querySelector('steAmount');
+
+        if (isJack) {
+            formRowJack.querySelector('input[type="number"]').value = totalAmount.toFixed(2); // Imposta l'importo a Jack
+            formRowSte.querySelector('input[type="number"]').value = "0.00"; // Imposta 0 a Ste
+        } else {
+            formRowJack.querySelector('input[type="number"]').value = "0.00"; // Imposta 0 a Jack
+            formRowSte.querySelector('input[type="number"]').value = totalAmount.toFixed(2); // Imposta l'importo a Ste
+        }
+    }
+
+    buttonJack.addEventListener('click', function() {
+        setAmount(true); // Passa true per Jack
+    });
+
+    // Aggiungi event listener per Ste
+    buttonSte.addEventListener('click', function() {
+        setAmount(false); // Passa false per Ste
     });
 });
