@@ -204,3 +204,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     displayExpenses();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Seleziona tutti i pulsanti con la classe buttonT
+    const buttonsTutto = document.querySelectorAll('.buttonT');
+    
+    // Aggiungi un event listener a ciascun pulsante
+    buttonsTutto.forEach(button => {
+        button.addEventListener('click', function() {
+            // Trova il campo di input associato al pulsante cliccato
+            const formRow = button.closest('.form-row'); // trova il div genitore
+            const amountInput = formRow.querySelector('input[type="number"]'); // trova l'input di tipo number
+
+            // Recupera l'importo totale
+            const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0;
+
+            // Imposta il valore dell'input sul totale
+            amountInput.value = totalAmount.toFixed(2); // formattiamo il numero a 2 decimali
+        });
+    });
+});
