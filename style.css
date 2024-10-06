@@ -129,22 +129,22 @@ td {
 }
 
 .buttonT {
-    width: 40%;
-    padding: 10px 10px;
+    width: 25%;
+    padding: 12px 12px;
     text-align: center;
     cursor: pointer;
     outline: none;
     color: #fff;
     background-color: #007aff;
     border: none;
-    border-radius: 2px;
-    box-shadow: 0 2px #999;
+    border-radius: 5px;
+    box-shadow: 5px 5px #999;
   }
 
 .buttonT:hover {background-color: #3e8e41}
 
 .buttonT:active {
   background-color: #3e8e41;
-  box-shadow: 0 5px #c5c4c4;
+  box-shadow: 5px 5px #c5c4c4;
   transform: translateY(4px);
 }
