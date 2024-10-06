@@ -129,8 +129,12 @@ td {
 }
 
 .buttonT {
+<<<<<<< HEAD
     width: 10%;
     padding: 5px 10px;
+=======
+    width: 50%;
+>>>>>>> 8c42f1f729a9ab4b247a2ff800c663410b9ffede
     text-align: center;
     cursor: pointer;
     outline: none;
