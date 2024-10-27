@@ -204,32 +204,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     displayExpenses();
 });
-
+    
 document.addEventListener('DOMContentLoaded', function() {
+    const buttonJack = document.getElementById('jacktotbutton'); 
+    const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0; // Recupera l'importo totale o mette a 0 se non c'è
+    const formRowJack = document.querySelector('jackAmount'); 
+    const formRowSte = document.querySelector('steAmount');
+    
+    formRowJack.querySelector('input[type="number"]').value = totalAmount.toFixed(2); // Imposta l'importo a Jack
+    formRowSte.querySelector('input[type="number"]').value = "0.00"; // Imposta 0 a Ste
 
-    const buttonJack = document.getElementById('buttonJack'); 
-    const buttonSte = document.getElementById('buttonSte');
-
-    function setAmount(isJack) {
-        const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0; // Recupera l'importo totale o mette a 0 se non c'è
-        const formRowJack = document.querySelector('jackAmount'); 
-        const formRowSte = document.querySelector('steAmount');
-
-        if (isJack) {
-            formRowJack.querySelector('input[type="number"]').value = totalAmount.toFixed(2); // Imposta l'importo a Jack
-            formRowSte.querySelector('input[type="number"]').value = "0.00"; // Imposta 0 a Ste
-        } else {
-            formRowJack.querySelector('input[type="number"]').value = "0.00"; // Imposta 0 a Jack
-            formRowSte.querySelector('input[type="number"]').value = totalAmount.toFixed(2); // Imposta l'importo a Ste
-        }
-    }
-
-    buttonJack.addEventListener('click', function() {
-        setAmount(true); // Passa true per Jack
-    });
-
-    // Aggiungi event listener per Ste
-    buttonSte.addEventListener('click', function() {
-        setAmount(false); // Passa false per Ste
-    });
 });
