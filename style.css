@@ -129,8 +129,8 @@ td {
 }
 
 .buttonT {
-    width: 25%;
-    padding: 12px 12px;
+    width: 15%;
+    /*padding: 12px 12px; */
     text-align: center;
     cursor: pointer;
     outline: none;
