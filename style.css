@@ -138,13 +138,13 @@ td {
     background-color: #007aff;
     border: none;
     border-radius: 5px;
-    box-shadow: 5px 5px #999;
+    box-shadow: 2px 2px #999;
   }
 
 .buttonT:hover {background-color: #3e8e41}
 
 .buttonT:active {
   background-color: #3e8e41;
-  box-shadow: 5px 5px #c5c4c4;
+  box-shadow: 2px 2px #c5c4c4;
   transform: translateY(4px);
 }
