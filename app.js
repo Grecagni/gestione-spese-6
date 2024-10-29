@@ -204,14 +204,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     displayExpenses();
 });
-    
-document.addEventListener('DOMContentLoaded', function() {
-    const buttonJack = document.getElementById('jacktotbutton'); 
-    const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0; // Recupera l'importo totale o mette a 0 se non c'è
-    const formRowJack = document.querySelector('jackAmount'); 
-    const formRowSte = document.querySelector('steAmount');
-    
-    formRowJack.querySelector('input[type="number"]').value = totalAmount.toFixed(2); // Imposta l'importo a Jack
-    formRowSte.querySelector('input[type="number"]').value = "0.00"; // Imposta 0 a Ste
 
+document.addEventListener("DOMContentLoaded", function() {
+    const totalAmountInput = document.getElementById("totalAmount");
+    const jackAmountInput = document.getElementById("jackAmount");
+    const steAmountInput = document.getElementById("steAmount");
+    
+    document.getElementById("jacktotbutton").addEventListener("click", function() {
+        // Imposta l'importo totale a Jack e a Ste a 0
+        jackAmountInput.value = totalAmountInput.value; // Imposta l'importo di Jack
+        steAmountInput.value = 0; // Azzeriamo l'importo di Ste
+    });
+
+    document.getElementById("stetotbutton").addEventListener("click", function() {
+        // Imposta l'importo totale a Ste e a Jack a 0
+        steAmountInput.value = totalAmountInput.value; // Imposta l'importo di Ste
+        jackAmountInput.value = 0; // Azzeriamo l'importo di Jack
+    });
 });
